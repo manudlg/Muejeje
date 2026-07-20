@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Salida pendiente?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f39c12; /* ¡Fondo color naranja/pan de hamburguesa! 🍔 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita que salgan barras de scroll con la explosión del confeti */
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #4a2711; /* Color café oscuro para combinar */
+            font-size: 24px;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #btn-si {
+            background-color: #4cd137;
+            color: white;
+        }
+
+        #btn-no {
+            background-color: #c23616;
+            color: white;
+            position: relative; 
+        }
+    </style>
+    
+    <!-- ESTA ES LA LÍNEA QUE FALTABA: Carga el creador de confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <div style="font-size: 50px;">🍔❤️🍔</div>
+        
+        <h1 id="pregunta">¿Quieres ir a comer burgir conmigo?</h1>
+        
+        <div class="botones">
+            <button id="btn-si" onclick="aceptar()">Sí</button>
+            <button id="btn-no" onmouseover="moverBoton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function aceptar() {
+            document.getElementById('pregunta').innerHTML = "vamooooo, que weno que aceptaste, te la debia de hace rato...❤️‍🩹";
+            
+            document.getElementById('btn-si').style.display = 'none';
+            document.getElementById('btn-no').style.display = 'none';
+            
+            // Ahora que la librería está cargada arriba, esto funcionará perfecto
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function moverBoton() {
+            const btnNo = document.getElementById('btn-no');
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+    </script>
+
+</body>
+</html>
